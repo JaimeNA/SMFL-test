@@ -11,9 +11,8 @@ Game::Game(const char* Name, const int width, const int height)
 : WIN_WIDTH(width), WIN_HEIGHT(height){//Initializer
 
 
-    this->initTexture(0, "t.jpg");
+    this->initTexture(0, "t.png");
     this->initWindow(Name);
-shape.setFillColor(Color(150, 50, 250));
 
 }
 
@@ -37,10 +36,34 @@ void Game::UpdateInput(){
         
         this->window.close();
 
-        break;
+    break;
     
+    case Keyboard::A:
+
+        shape.move(Vector2f(-5.f, 0.f));
+
+    break;
+
+    case Keyboard::D:
+
+        shape.move(Vector2f(5.f, 0.f));
+
+    break;
+
+    case Keyboard::W:
+
+        shape.move(Vector2f(0.f, -5.f));
+
+    break;
+
+    case Keyboard::S:
+
+        shape.move(Vector2f(0.f, 5.f));
+
+    break;
+
     default:
-        break;
+    break;
     }
 
 
@@ -56,17 +79,12 @@ void Game::Update(){
 
     }
 
-        // clearing the window with a white color
-        window.clear(Color::White);
-
-        this->Render();
-
-        // end the current frame
-        window.display();
-    
 }
 
 void Game::Render(){
+
+    // clearing the window with a white color
+    window.clear(Color::White);
 
     if (!renderTexture.create(WIN_WIDTH, WIN_HEIGHT)){
 
@@ -75,14 +93,14 @@ void Game::Render(){
 
     }
 
-    this->mainSprite.setTexture(*texture.at(0));
+    shape.setTexture(texture.at(0));
 
     // OFF-SCREEN drawing 
 
     // clear the textures
     renderTexture.clear();
 
-    renderTexture.draw(mainSprite);
+    renderTexture.draw(shape);
 
     // end the current frame
     renderTexture.display();
@@ -90,9 +108,14 @@ void Game::Render(){
     // ON-SCREEN drawing 
 
     // get the target texture (where the stuff has been drawn)
-    const Texture& Texture = renderTexture.getTexture();
+    const Texture& Tex = renderTexture.getTexture();
 
-    shape.setTexture(&Texture);
+    tempSprite.setTexture(Tex);
+
     // draw it on the window 
-    window.draw(shape);
+    window.draw(tempSprite);
+
+    // end the current frame
+    window.display();
+
 }

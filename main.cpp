@@ -12,6 +12,8 @@ int main()
         
         game.Update();
 
+        game.Render();
+
     }
 
     return 0;
