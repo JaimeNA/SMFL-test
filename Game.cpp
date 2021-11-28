@@ -10,6 +10,8 @@ CircleShape shape(50.f);
 Game::Game(const char* Name, const int width, const int height)
 : WIN_WIDTH(width), WIN_HEIGHT(height){//Initializer
 
+
+    this->initTexture(0, "t.jpg");
     this->initWindow(Name);
 shape.setFillColor(Color(150, 50, 250));
 
@@ -17,7 +19,9 @@ shape.setFillColor(Color(150, 50, 250));
 
 void Game::initTexture(short tex, const char* dir){
 
-    if(this->texture.insert().loadFromFile(dir)){// see how i did it with glfw
+    this->texture.push_back(new Texture);
+
+    if(!this->texture[0]->loadFromFile(dir)){
 
         std::cout << "Error loading texture from file" << std::endl;
 
@@ -52,9 +56,6 @@ void Game::Update(){
 
     }
 
-    // the rendering loop
-    while (window.isOpen())
-    {
         // clearing the window with a white color
         window.clear(Color::White);
 
@@ -62,8 +63,7 @@ void Game::Update(){
 
         // end the current frame
         window.display();
-    }
-
+    
 }
 
 void Game::Render(){
@@ -75,8 +75,7 @@ void Game::Render(){
 
     }
 
-    this->initTexture(0, "t.jpg");
-    this->mainSprite.setTexture(texture.at(0));
+    this->mainSprite.setTexture(*texture.at(0));
 
     // OFF-SCREEN drawing 
 
@@ -93,7 +92,7 @@ void Game::Render(){
     // get the target texture (where the stuff has been drawn)
     const Texture& Texture = renderTexture.getTexture();
 
-    this->tempSprite.setTexture(Texture);
+    shape.setTexture(&Texture);
     // draw it on the window 
-    window.draw(tempSprite);
+    window.draw(shape);
 }

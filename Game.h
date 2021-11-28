@@ -17,7 +17,7 @@ class Game{
         Sprite tempSprite, mainSprite;
         // textures
 
-        std::vector<Texture> texture;
+        std::vector<Texture*> texture;
 
         const int WIN_WIDTH, WIN_HEIGHT;
 
