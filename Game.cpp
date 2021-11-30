@@ -1,4 +1,4 @@
-#include "Game.h"
+#include"Game.h"
 
 void Game::initWindow(const char* Name){
 
@@ -6,29 +6,29 @@ void Game::initWindow(const char* Name){
     this->window.setVerticalSyncEnabled(true);//synchronizes with the vertical frequency of the monitor
 
 }
-CircleShape shape(50.f);
+
 Game::Game(const char* Name, const int width, const int height)
 : WIN_WIDTH(width), WIN_HEIGHT(height){//Initializer
 
-
-    this->initTexture(0, "t.png");
     this->initWindow(Name);
 
 }
 
-void Game::initTexture(short tex, const char* dir){
+Texture Game::createTexture(const char* dir){
 
-    this->texture.push_back(new Texture);
+    Texture tex;
 
-    if(!this->texture[0]->loadFromFile(dir)){
+    if(!tex.loadFromFile(dir)){
 
         std::cout << "Error loading texture from file" << std::endl;
 
     }
 
+    return tex;
+
 }
 
-void Game::UpdateInput(){
+void Game::UpdateInput(Player* player){
 
     switch (this->event.key.code){
 
@@ -40,28 +40,28 @@ void Game::UpdateInput(){
     
     case Keyboard::A:
 
-        shape.move(Vector2f(-5.f, 0.f));
+        player->move2f(-5.f, 0.f);
 
     break;
 
     case Keyboard::D:
 
-        shape.move(Vector2f(5.f, 0.f));
+        player->move2f(5.f, 0.f);   
 
     break;
 
     case Keyboard::W:
 
-        shape.move(Vector2f(0.f, -5.f));
+        player->move2f(0.f, -5.f);
 
     break;
 
     case Keyboard::S:
 
-        shape.move(Vector2f(0.f, 5.f));
+        player->move2f(0.f, 5.f);
 
     break;
-
+  
     default:
     break;
     }
@@ -69,19 +69,19 @@ void Game::UpdateInput(){
 
 }
 
-void Game::Update(){
+void Game::Update(Player* player){
 
     // check all the window's events that were triggered since the last iteration of the loop
     
     while (this->window.pollEvent(this->event)){
     
-        UpdateInput();
+        UpdateInput(player);
 
     }
 
 }
 
-void Game::Render(){
+void Game::Render(RectangleShape sprite){
 
     // clearing the window with a white color
     window.clear(Color::White);
@@ -93,14 +93,12 @@ void Game::Render(){
 
     }
 
-    shape.setTexture(texture.at(0));
-
     // OFF-SCREEN drawing 
 
     // clear the textures
     renderTexture.clear();
 
-    renderTexture.draw(shape);
+    renderTexture.draw(sprite);
 
     // end the current frame
     renderTexture.display();

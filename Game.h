@@ -1,11 +1,6 @@
-#include <SFML/Graphics.hpp>
-#include<SFML/Window.hpp>
-#include<SFML/Graphics.hpp>
+#pragma once
 
-#include<iostream>
-#include<vector>
-
-using namespace sf;
+#include"Libraries.h"
 
 class Game{
     
@@ -14,15 +9,11 @@ class Game{
         RenderWindow window;
         Event event;
         RenderTexture renderTexture;
-        Sprite tempSprite, mainSprite;
-        // textures
-
-        std::vector<Texture*> texture;
+        Sprite tempSprite;
 
         const int WIN_WIDTH, WIN_HEIGHT;
 
         void initWindow(const char* Name);
-        void initTexture(short tex, const char* dir);
 
     public:
 
@@ -36,7 +27,8 @@ class Game{
 
         //Functions
 
-        void UpdateInput();
-        void Update();
-        void Render();
+        Texture createTexture(const char* dir);
+        void UpdateInput(Player* player);
+        void Update(Player* player);
+        void Render(RectangleShape sprite);
 };
