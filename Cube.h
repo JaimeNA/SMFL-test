@@ -2,30 +2,30 @@
 
 #include"Libraries.h"
 
-class Player{
+class Cube{
 
 private:
 
     static float PosX, PosY;
-    RectangleShape player;
+    int lenght;
+    RectangleShape cube;
 
 public:
 
     // contructor
 
-    Player(const int PLAYER_WIDTH, const int PLAYER_HEIGHT, Texture PLAYER_TEX);
+    Cube(const int CUBE_WIDTH, const int CUBE_HEIGHT, Texture CUBE_TEX);
 
     // functions
 
     void Update();
-    RectangleShape getSprite(){ return this->player; }
+    RectangleShape* getSprite(){ return &this->cube; }
     bool Colision();
 
     // accessors
 
 	void SetX(float X) { PosX += X; }
 	void SetY(float Y) { PosY += Y; }
-    void move2f(float x, float y){ player.move(Vector2f(x, y)); }
 
 	double GetX() { return PosX; }
 	double GetY() { return PosY; }

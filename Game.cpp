@@ -28,7 +28,7 @@ Texture Game::createTexture(const char* dir){
 
 }
 
-void Game::UpdateInput(Player* player){
+void Game::UpdateInput(RectangleShape* sprite){
 
     switch (this->event.key.code){
 
@@ -40,25 +40,25 @@ void Game::UpdateInput(Player* player){
     
     case Keyboard::A:
 
-        player->move2f(-5.f, 0.f);
+        sprite->move(Vector2f(-5.f, 0.f));
 
     break;
 
     case Keyboard::D:
 
-        player->move2f(5.f, 0.f);   
+        sprite->move(Vector2f(5.f, 0.f)); 
 
     break;
 
     case Keyboard::W:
 
-        player->move2f(0.f, -5.f);
+        sprite->move(Vector2f(0.f, -5.f));
 
     break;
 
     case Keyboard::S:
 
-        player->move2f(0.f, 5.f);
+        sprite->move(Vector2f(0.f, 5.f));
 
     break;
   
@@ -69,19 +69,19 @@ void Game::UpdateInput(Player* player){
 
 }
 
-void Game::Update(Player* player){
+void Game::Update(RectangleShape* sprite){
 
     // check all the window's events that were triggered since the last iteration of the loop
     
     while (this->window.pollEvent(this->event)){
     
-        UpdateInput(player);
+        UpdateInput(sprite);
 
     }
 
 }
 
-void Game::Render(RectangleShape sprite){
+void Game::Render(RectangleShape* sprite){
 
     // clearing the window with a white color
     window.clear(Color::White);
@@ -98,7 +98,7 @@ void Game::Render(RectangleShape sprite){
     // clear the textures
     renderTexture.clear();
 
-    renderTexture.draw(sprite);
+    renderTexture.draw(*sprite);
 
     // end the current frame
     renderTexture.display();

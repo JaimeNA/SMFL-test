@@ -5,7 +5,7 @@
 #include<iostream>
 #include<vector>
 
-#include"Player.h"
+#include"Cube.h"
 #include"Game.h"
 
 using namespace sf;

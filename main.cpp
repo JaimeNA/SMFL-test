@@ -1,20 +1,20 @@
 #include"Game.h"
-#include"Player.h"
+#include"Cube.h"
 
 int main()
 {
     
     Game game("Game",800, 800);
 
-    Player player(20, 20, game.createTexture("t.png"));
+    Cube cube(20, 20, game.createTexture("t.png"));
 
     // run the program as long as the window is open
     while (game.getWindowShouldClose())
     {
         
-        game.Update(&player);
+        game.Update(cube.getSprite());
 
-        game.Render(player.getSprite());
+        game.Render(cube.getSprite());
 
     }
 

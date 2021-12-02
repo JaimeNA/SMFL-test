@@ -28,7 +28,7 @@ class Game{
         //Functions
 
         Texture createTexture(const char* dir);
-        void UpdateInput(Player* player);
-        void Update(Player* player);
-        void Render(RectangleShape sprite);
+        void UpdateInput(RectangleShape* sprite);
+        void Update(RectangleShape* sprite);
+        void Render(RectangleShape* sprite);
 };
