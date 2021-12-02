@@ -14,17 +14,15 @@ Game::Game(const char* Name, const int width, const int height)
 
 }
 
-Texture Game::createTexture(const char* dir){
+Texture* Game::createTexture(const char* dir){
 
-    Texture tex;
-
-    if(!tex.loadFromFile(dir)){
+    if(!Tex.loadFromFile(dir)){
 
         std::cout << "Error loading texture from file" << std::endl;
 
     }
 
-    return tex;
+    return &Tex;
 
 }
 

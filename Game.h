@@ -10,6 +10,7 @@ class Game{
         Event event;
         RenderTexture renderTexture;
         Sprite tempSprite;
+        Texture Tex;
 
         const int WIN_WIDTH, WIN_HEIGHT;
 
@@ -27,7 +28,7 @@ class Game{
 
         //Functions
 
-        Texture createTexture(const char* dir);
+        Texture* createTexture(const char* dir);
         void UpdateInput(RectangleShape* sprite);
         void Update(RectangleShape* sprite);
         void Render(RectangleShape* sprite);

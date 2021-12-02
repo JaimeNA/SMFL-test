@@ -2,7 +2,7 @@
 
 #include"Libraries.h"
 
-class Cube{
+class Snake{
 
 private:
 
@@ -14,12 +14,7 @@ public:
 
     // contructor
 
-    Cube(const int CUBE_WIDTH, const int CUBE_HEIGHT, Texture* CUBE_TEX){
-
-    this->cube.setSize(Vector2f(CUBE_WIDTH, CUBE_HEIGHT));
-    this->cube.setTexture(CUBE_TEX);
-
-    }
+    Snake(const int CUBE_WIDTH, const int CUBE_HEIGHT, Texture* CUBE_TEX);
 
     // functions
 
