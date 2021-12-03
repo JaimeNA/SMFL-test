@@ -16,7 +16,7 @@ Game::Game(const char* Name, const int width, const int height)
 
 Texture* Game::createTexture(const char* dir){
 
-    if(!Tex.loadFromFile(dir)){
+    if(!Tex.loadFromFile(dir)){// chicking for errors
 
         std::cout << "Error loading texture from file" << std::endl;
 
@@ -36,25 +36,25 @@ void Game::UpdateInput(RectangleShape* sprite){
 
     break;
     
-    case Keyboard::A:
+    case Keyboard::A:// left
 
         sprite->move(Vector2f(-5.f, 0.f));
 
     break;
 
-    case Keyboard::D:
+    case Keyboard::D:// right
 
         sprite->move(Vector2f(5.f, 0.f)); 
 
     break;
 
-    case Keyboard::W:
+    case Keyboard::W:// up
 
         sprite->move(Vector2f(0.f, -5.f));
 
     break;
 
-    case Keyboard::S:
+    case Keyboard::S:// down
 
         sprite->move(Vector2f(0.f, 5.f));
 

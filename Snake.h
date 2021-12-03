@@ -7,19 +7,18 @@ class Snake{
 private:
 
     static float PosX, PosY;
-    int lenght;
-    RectangleShape cube;
+
+    std::vector<Cube*> cube;
 
 public:
 
     // contructor
 
-    Snake(const int CUBE_WIDTH, const int CUBE_HEIGHT, Texture* CUBE_TEX);
+    Snake();
 
     // functions
 
-    void Update();
-    RectangleShape* getSprite(){ return &this->cube; }
+    void Update(Game* game);
     bool Colision();
 
     // accessors
