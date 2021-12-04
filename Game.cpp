@@ -1,5 +1,7 @@
 #include"Game.h"
 
+#include"Snake.h"
+
 void Game::initWindow(const char* Name){
 
     this->window.create(VideoMode(WIN_WIDTH, WIN_HEIGHT), Name);
@@ -12,17 +14,26 @@ Game::Game(const char* Name, const int width, const int height)
 
     this->initWindow(Name);
 
+
+    if (!this->renderTexture.create(WIN_WIDTH, WIN_HEIGHT)){
+
+        // error
+        std::cout << "Failed to create render texture::Game.cpp" << std::endl;
+
+    }
+
+
 }
 
 Texture* Game::createTexture(const char* dir){
 
-    if(!Tex.loadFromFile(dir)){// chicking for errors
+    if(!this->tex.loadFromFile(dir)){// chicking for errors
 
         std::cout << "Error loading texture from file" << std::endl;
 
     }
 
-    return &Tex;
+    return &this->tex;
 
 }
 
@@ -79,24 +90,24 @@ void Game::Update(RectangleShape* sprite){
 
 }
 
-void Game::Render(RectangleShape* sprite){
+Texture Tex;
+
+void Game::Render(std::vector<Cube*> cube){
 
     // clearing the window with a white color
     window.clear(Color::White);
-
-    if (!renderTexture.create(WIN_WIDTH, WIN_HEIGHT)){
-
-    // error
-    std::cout << "Failed to create render texture::Game.cpp" << std::endl;
-
-    }
 
     // OFF-SCREEN drawing 
 
     // clear the textures
     renderTexture.clear();
 
-    renderTexture.draw(*sprite);
+   // for(int i = 0; i < sizeof(cube);i++){
+
+    renderTexture.draw(*cube[0]->getSprite());
+    renderTexture.draw(*cube[1]->getSprite());
+
+   // }
 
     // end the current frame
     renderTexture.display();
@@ -104,7 +115,7 @@ void Game::Render(RectangleShape* sprite){
     // ON-SCREEN drawing 
 
     // get the target texture (where the stuff has been drawn)
-    const Texture& Tex = renderTexture.getTexture();
+    Tex = renderTexture.getTexture();
 
     tempSprite.setTexture(Tex);
 

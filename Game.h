@@ -2,6 +2,8 @@
 
 #include"Libraries.h"
 
+#include "Cube.h"
+
 class Game{
     
     private:
@@ -10,7 +12,7 @@ class Game{
         Event event;
         RenderTexture renderTexture;
         Sprite tempSprite;
-        Texture Tex;
+        Texture tex;
 
         const int WIN_WIDTH, WIN_HEIGHT;
 
@@ -31,5 +33,5 @@ class Game{
         Texture* createTexture(const char* dir);
         void UpdateInput(RectangleShape* sprite);
         void Update(RectangleShape* sprite);
-        void Render(RectangleShape* sprite);
+        void Render(std::vector<Cube*> cube);
 };

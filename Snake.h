@@ -1,6 +1,8 @@
 #pragma once
 
 #include"Libraries.h"
+#include "Cube.h"
+#include"Game.h"
 
 class Snake{
 
@@ -28,6 +30,7 @@ public:
 
 	double GetX() { return PosX; }
 	double GetY() { return PosY; }
+    std::vector<Cube*> GetSnake(){ return cube; }
 
 };
 

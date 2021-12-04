@@ -12,8 +12,9 @@ int main()
     // run the program as long as the window is open
     while (game.getWindowShouldClose())
     {
-        
-       snake.Update(&game);
+
+        snake.Update(&game);   
+       game.Render(snake.GetSnake());
 
     }
 
