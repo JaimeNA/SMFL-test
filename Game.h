@@ -31,7 +31,7 @@ class Game{
         //Functions
 
         Texture* createTexture(const char* dir);
-        void UpdateInput(RectangleShape* sprite);
-        void Update(RectangleShape* sprite);
+        void UpdateInput(std::vector<Cube*> cube);
+        void Update(std::vector<Cube*> cube);
         void Render(std::vector<Cube*> cube);
 };

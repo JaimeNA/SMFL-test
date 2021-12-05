@@ -37,7 +37,7 @@ Texture* Game::createTexture(const char* dir){
 
 }
 
-void Game::UpdateInput(RectangleShape* sprite){
+void Game::UpdateInput(std::vector<Cube*> cube){
 
     switch (this->event.key.code){
 
@@ -46,7 +46,7 @@ void Game::UpdateInput(RectangleShape* sprite){
         this->window.close();
 
     break;
-    
+    /*
     case Keyboard::A:// left
 
         sprite->move(Vector2f(-5.f, 0.f));
@@ -55,7 +55,7 @@ void Game::UpdateInput(RectangleShape* sprite){
 
     case Keyboard::D:// right
 
-        sprite->move(Vector2f(5.f, 0.f)); 
+        cube[0]->getSprite().move(Vector2f(5.f, 0.f)); 
 
     break;
 
@@ -70,7 +70,7 @@ void Game::UpdateInput(RectangleShape* sprite){
         sprite->move(Vector2f(0.f, 5.f));
 
     break;
-  
+  */
     default:
     break;
     }
@@ -78,13 +78,13 @@ void Game::UpdateInput(RectangleShape* sprite){
 
 }
 
-void Game::Update(RectangleShape* sprite){
+void Game::Update(std::vector<Cube*> cube){
 
     // check all the window's events that were triggered since the last iteration of the loop
     
     while (this->window.pollEvent(this->event)){
     
-        UpdateInput(sprite);
+        UpdateInput(cube);
 
     }
 
@@ -102,12 +102,11 @@ void Game::Render(std::vector<Cube*> cube){
     // clear the textures
     renderTexture.clear();
 
-   // for(int i = 0; i < sizeof(cube);i++){
+    for(int i = 0; i < cube.size();i++){// go through all the elements
 
-    renderTexture.draw(*cube[0]->getSprite());
-    renderTexture.draw(*cube[1]->getSprite());
+        renderTexture.draw(*cube[i]->getSprite());
 
-   // }
+    }
 
     // end the current frame
     renderTexture.display();

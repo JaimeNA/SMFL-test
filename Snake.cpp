@@ -8,7 +8,7 @@ Snake::Snake(){
 
 void Snake::Update(Game* game){
 
-    game->Update(cube[0]->getSprite());
+    game->Update(cube);
 
 
 }
