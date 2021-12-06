@@ -2,8 +2,6 @@
 
 #include"Libraries.h"
 
-#include "Cube.h"
-
 class Game{
     
     private:
@@ -31,7 +29,7 @@ class Game{
         //Functions
 
         Texture* createTexture(const char* dir);
-        void UpdateInput(std::vector<Cube*> cube);
-        void Update(std::vector<Cube*> cube);
-        void Render(std::vector<Cube*> cube);
+        void UpdateInput(std::vector<RectangleShape*> cube);
+        void Update(std::vector<RectangleShape*> cube);
+        void Render(std::vector<RectangleShape*> cube);
 };

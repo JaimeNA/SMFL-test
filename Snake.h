@@ -1,7 +1,6 @@
 #pragma once
 
 #include"Libraries.h"
-#include "Cube.h"
 #include"Game.h"
 
 class Snake{
@@ -10,7 +9,7 @@ private:
 
     static float PosX, PosY;
 
-    std::vector<Cube*> cube;
+    std::vector<RectangleShape*> cube;
 
 public:
 
@@ -21,6 +20,7 @@ public:
     // functions
 
     void Update(Game* game);
+    void Move(float x, float y);
     bool Colision();
 
     // accessors
@@ -30,7 +30,7 @@ public:
 
 	double GetX() { return PosX; }
 	double GetY() { return PosY; }
-    std::vector<Cube*> GetSnake(){ return cube; }
+    std::vector<RectangleShape*> GetSnake(){ return cube; }
 
 };
 

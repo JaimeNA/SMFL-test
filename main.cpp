@@ -1,5 +1,4 @@
 #include"Game.h"
-#include"Cube.h"
 #include"Snake.h"
 
 int main()
@@ -14,7 +13,7 @@ int main()
     {
 
         snake.Update(&game);   
-       game.Render(snake.GetSnake());
+        game.Render(snake.GetSnake());
 
     }
 

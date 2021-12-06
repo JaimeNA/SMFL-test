@@ -23,7 +23,7 @@ LIBS	=	-lsfml-graphics -lsfml-window -lsfml-system
 
 
 # define the C source files
-SRCS	=	main.cpp Game.cpp Snake.cpp Libraries.h Game.h Snake.h Cube.h
+SRCS	=	main.cpp Game.cpp Snake.cpp Libraries.h Game.h Snake.h
 
 
 # define the C++ object files 

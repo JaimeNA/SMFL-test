@@ -37,7 +37,7 @@ Texture* Game::createTexture(const char* dir){
 
 }
 
-void Game::UpdateInput(std::vector<Cube*> cube){
+void Game::UpdateInput(std::vector<RectangleShape*> cube){
 
     switch (this->event.key.code){
 
@@ -46,31 +46,32 @@ void Game::UpdateInput(std::vector<Cube*> cube){
         this->window.close();
 
     break;
-    /*
+    
     case Keyboard::A:// left
 
-        sprite->move(Vector2f(-5.f, 0.f));
+    cube[0]->move(Vector2f(5.f, 0.0f));
+
 
     break;
 
     case Keyboard::D:// right
 
-        cube[0]->getSprite().move(Vector2f(5.f, 0.f)); 
+        
 
     break;
 
     case Keyboard::W:// up
 
-        sprite->move(Vector2f(0.f, -5.f));
+        
 
     break;
 
     case Keyboard::S:// down
 
-        sprite->move(Vector2f(0.f, 5.f));
+        
 
     break;
-  */
+  
     default:
     break;
     }
@@ -78,7 +79,7 @@ void Game::UpdateInput(std::vector<Cube*> cube){
 
 }
 
-void Game::Update(std::vector<Cube*> cube){
+void Game::Update(std::vector<RectangleShape*> cube){
 
     // check all the window's events that were triggered since the last iteration of the loop
     
@@ -92,7 +93,7 @@ void Game::Update(std::vector<Cube*> cube){
 
 Texture Tex;
 
-void Game::Render(std::vector<Cube*> cube){
+void Game::Render(std::vector<RectangleShape*> cube){
 
     // clearing the window with a white color
     window.clear(Color::White);
@@ -104,7 +105,7 @@ void Game::Render(std::vector<Cube*> cube){
 
     for(int i = 0; i < cube.size();i++){// go through all the elements
 
-        renderTexture.draw(*cube[i]->getSprite());
+        renderTexture.draw(*cube[i]);
 
     }
 
