@@ -12,7 +12,7 @@ int main()
     while (game.getWindowShouldClose())
     {
 
-        snake.Update(&game);   
+        game.Update(&snake);  
         game.Render(snake.GetSnake());
 
     }

@@ -1,7 +1,5 @@
 #include"Game.h"
 
-#include"Snake.h"
-
 void Game::initWindow(const char* Name){
 
     this->window.create(VideoMode(WIN_WIDTH, WIN_HEIGHT), Name);
@@ -37,7 +35,7 @@ Texture* Game::createTexture(const char* dir){
 
 }
 
-void Game::UpdateInput(std::vector<RectangleShape*> cube){
+void Game::UpdateInput(Snake* snake){
 
     switch (this->event.key.code){
 
@@ -49,26 +47,25 @@ void Game::UpdateInput(std::vector<RectangleShape*> cube){
     
     case Keyboard::A:// left
 
-    cube[0]->move(Vector2f(5.f, 0.0f));
-
+    snake->Move(-20.f, 0.f);
 
     break;
 
     case Keyboard::D:// right
-
         
+    snake->Move(20.f, 0.f);
 
     break;
 
     case Keyboard::W:// up
 
-        
+    snake->Move(0.f, -20.f);
 
     break;
 
     case Keyboard::S:// down
 
-        
+    snake->Move(0.f, 20.f);
 
     break;
   
@@ -79,13 +76,13 @@ void Game::UpdateInput(std::vector<RectangleShape*> cube){
 
 }
 
-void Game::Update(std::vector<RectangleShape*> cube){
+void Game::Update(Snake* snake){
 
     // check all the window's events that were triggered since the last iteration of the loop
     
     while (this->window.pollEvent(this->event)){
     
-        UpdateInput(cube);
+        UpdateInput(snake);
 
     }
 
