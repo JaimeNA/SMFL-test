@@ -37,60 +37,78 @@ Texture* Game::createTexture(const char* dir){
 
 void Game::UpdateInput(Snake* snake){
 
-    switch (this->event.key.code){
+    static float x, y;
 
-    case Keyboard::Escape:
-        
-        this->window.close();
-
-    break;
+    // check all the window's events that were triggered since the last iteration of the loop
     
-    case Keyboard::A:// left
+    if (this->window.pollEvent(this->event)){
 
-    snake->Move(-20.f, 0.f);
+        switch (this->event.key.code){
 
-    break;
-
-    case Keyboard::D:// right
+        case Keyboard::Escape:
         
-    snake->Move(20.f, 0.f);
+            this->window.close();
 
-    break;
+        break;
+    
+        case Keyboard::A:// left
 
-    case Keyboard::W:// up
+            if(x == 0.f) // block going back in the same direction
+                x = -10.f;  
 
-    snake->Move(0.f, -20.f);
+            y = 0.f;
 
-    break;
+        break;
 
-    case Keyboard::S:// down
+        case Keyboard::D:// right
+        
+            if(x == 0.f)
+                x = 10.f; // to avoid going diagonal
+            y = 0.f;
 
-    snake->Move(0.f, 20.f);
+        break;
 
-    break;
+        case Keyboard::W:// up
+
+            x = 0.f;
+
+            if(y == 0.f)
+                y = -10.f;
+
+        break;
+
+        case Keyboard::S:// down
+
+            x = 0.f;
+
+            if(y == 0.f)
+            y = 10.f;
+
+        break;
   
-    default:
-    break;
+        default:
+        break;
+        }
+
     }
 
+    snake->Move(x, y);// moving the snake in requested direction
 
 }
 
 void Game::Update(Snake* snake){
 
-    // check all the window's events that were triggered since the last iteration of the loop
-    
-    while (this->window.pollEvent(this->event)){
-    
-        UpdateInput(snake);
+    UpdateInput(snake);
 
-    }
+    snake->Colision(&window);
 
 }
 
 Texture Tex;
 
 void Game::Render(std::vector<RectangleShape*> cube){
+
+    cube[0]->setTexture(createTexture("t.png"));
 
     // clearing the window with a white color
     window.clear(Color::White);

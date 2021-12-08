@@ -6,7 +6,7 @@ class Snake{
 
 private:
 
-    static float PosX, PosY;
+    float PosX[20], PosY[20];
 
     std::vector<RectangleShape*> player;
 
@@ -20,15 +20,12 @@ public:
 
     void Update();
     void Move(float x, float y);
-    bool Colision();
+    void Colision(RenderWindow* window);
 
     // accessors
 
-	void SetX(float X) { PosX += X; }
-	void SetY(float Y) { PosY += Y; }
-
-	double GetX() { return PosX; }
-	double GetY() { return PosY; }
+    void SetX(float x);
+    void SetY(float y);
     std::vector<RectangleShape*> GetSnake(){ return player; }
 
 };
