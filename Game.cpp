@@ -37,7 +37,7 @@ Texture* Game::createTexture(const char* dir){
 
 void Game::UpdateInput(Snake* snake){
 
-    static float x, y;
+    static float x, y = 15.f;
 
     // check all the window's events that were triggered since the last iteration of the loop
     
@@ -54,7 +54,7 @@ void Game::UpdateInput(Snake* snake){
         case Keyboard::A:// left
 
             if(x == 0.f) // block going back in the same direction
-                x = -10.f;  
+                x = -15.f;  
 
             y = 0.f;
 
@@ -63,7 +63,7 @@ void Game::UpdateInput(Snake* snake){
         case Keyboard::D:// right
         
             if(x == 0.f)
-                x = 10.f; // to avoid going diagonal
+                x = 15.f; // to avoid going diagonal
             y = 0.f;
 
         break;
@@ -73,7 +73,7 @@ void Game::UpdateInput(Snake* snake){
             x = 0.f;
 
             if(y == 0.f)
-                y = -10.f;
+                y = -15.f;
 
         break;
 
@@ -82,7 +82,14 @@ void Game::UpdateInput(Snake* snake){
             x = 0.f;
 
             if(y == 0.f)
-            y = 10.f;
+            y = 15.f;
+
+        break;
+
+        case Keyboard::Space:// down
+
+            x = 0.f;
+            y = 0.f;
 
         break;
   
@@ -92,15 +99,17 @@ void Game::UpdateInput(Snake* snake){
 
     }
 
-    snake->Move(x, y);// moving the snake in requested direction
+    if(!snake->Colision(&window)){// checking for collision
+
+        snake->Move(x, y);// moving the snake in requested direction
+
+    }
 
 }
 
 void Game::Update(Snake* snake){
 
     UpdateInput(snake);
-
-    snake->Colision(&window);
 
 }
 

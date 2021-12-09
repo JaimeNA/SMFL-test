@@ -10,6 +10,28 @@ Snake::Snake(){
     this->player.push_back(new RectangleShape);
     this->player.push_back(new RectangleShape);
     this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    this->player.push_back(new RectangleShape);
+    
     // setting size
 
     for(int i = 0; i < player.size();i++){
@@ -22,7 +44,7 @@ Snake::Snake(){
     
     for(int i = 0; i < player.size();i++){
 
-        player[i]->setPosition(20.f * i, 0);
+        player[i]->setPosition(20.f * i + 100.f, 100.f);
         
     }
 
@@ -34,8 +56,6 @@ Snake::Snake(){
     }
 
 }
-
-    float tempX, tempY, tempX1, tempY1;
 
 void Snake::Move(float x, float y){
 
@@ -53,46 +73,47 @@ void Snake::Move(float x, float y){
         PosY[i] = player[i]->getPosition().y;
 
     }
+    //std::cout << PosX[0] << " " << PosY[0] << std::endl;
 }
 
-void Snake::Colision(RenderWindow* window){
+bool Snake::Colision(RenderWindow* window){
 
-    if(PosX[0] < 0.f){ // if it collides with a wall
+    // wall colision
 
-        PosX[0] = window->getSize().x;
+    if(PosX[0] < -20.f){ // if it collides with a wall
+
+        player[0]->setPosition(window->getSize().x, PosY[0]);
+
+    }else if(PosY[0] < -20.f){
+
+        player[0]->setPosition(PosX[0], window->getSize().y);
 
     }else if(PosX[0] > window->getSize().x){
 
-        this->SetX(0.f);
-
-    }else if(PosY[0] < 0.f - 20.f * player.size()){ // if it collides with a wall
-
-        this->SetY(window->getSize().y);
+        player[0]->setPosition(-10.f, PosY[0]);
 
     }else if(PosY[0] > window->getSize().y){
 
-        this->SetY(0.f);
+        player[0]->setPosition(PosX[0], -10.f);
 
     }
 
-}
+    // body colision
 
-void Snake::SetX(float x){
+    for(int i = 5;i < player.size();i++){ 
 
-    for(int i = 0; i < player.size();i++){ // change all objects position
+        if(abs(PosX[0] - PosX[i]) < 5.f && abs(PosY[0] - PosY[i]) < 5.f){
 
-        player[i]->setPosition(i * 20.f + x, PosY[i]);
+            player[i]->setFillColor(Color(250, 100, 50));
 
-    }
+            this->Move(0.f, 0.f);
 
-}
+            return true;
 
-void Snake::SetY(float y){
-
-    for(int i = 0; i < player.size();i++){ // change all objects position
-
-        player[i]->setPosition(PosX[i], i * 20.f + y);
+        }
 
     }
+
+    return false;
 
 }

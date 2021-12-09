@@ -14,7 +14,7 @@ int main()
 
         game.Update(&snake);  
         game.Render(snake.GetSnake());
-
+            
     }
 
     return 0;
