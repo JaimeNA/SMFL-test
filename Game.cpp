@@ -88,8 +88,8 @@ void Game::UpdateInput(Snake* snake){
 
         case Keyboard::Space:// down
 
-            x = 0.f;
-            y = 0.f;
+            snake->InSize();
+            
 
         break;
   

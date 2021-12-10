@@ -7,6 +7,7 @@ class Snake{
 private:
 
     float PosX[200], PosY[200];
+    bool dead = false;
 
     std::vector<RectangleShape*> player;
 
@@ -25,6 +26,7 @@ public:
     // accessors
 
     std::vector<RectangleShape*> GetSnake(){ return player; }
+    void InSize();
 
 };
 

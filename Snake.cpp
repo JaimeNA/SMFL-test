@@ -7,30 +7,6 @@ Snake::Snake(){
     this->player.push_back(new RectangleShape);
     this->player.push_back(new RectangleShape);
     this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
-    this->player.push_back(new RectangleShape);
     
     // setting size
 
@@ -59,6 +35,8 @@ Snake::Snake(){
 
 void Snake::Move(float x, float y){
 
+if(!this->dead){
+
     for(int i = 1; i < player.size();i++){ // setting the positon of the previous block
 
         player[i]->setPosition(PosX[i-1], PosY[i-1]);
@@ -73,7 +51,8 @@ void Snake::Move(float x, float y){
         PosY[i] = player[i]->getPosition().y;
 
     }
-    //std::cout << PosX[0] << " " << PosY[0] << std::endl;
+}   
+
 }
 
 bool Snake::Colision(RenderWindow* window){
@@ -108,6 +87,8 @@ bool Snake::Colision(RenderWindow* window){
 
             this->Move(0.f, 0.f);
 
+            this->dead = true; // so its stop moving 
+
             return true;
 
         }
@@ -115,5 +96,13 @@ bool Snake::Colision(RenderWindow* window){
     }
 
     return false;
+
+}
+
+void Snake::InSize(){ // increasing the size by one
+        
+    this->player.push_back(new RectangleShape); 
+
+    this->player[this->player.size() - 1]->setSize(Vector2f(20, 20));
 
 }
