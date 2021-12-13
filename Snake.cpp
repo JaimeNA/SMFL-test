@@ -12,7 +12,7 @@ Snake::Snake(){
 
     for(int i = 0; i < player.size();i++){
 
-        player[i]->setSize(Vector2f(20, 20));
+        player[i]->setSize(Vector2f(10, 10));
 
     }
 
@@ -55,7 +55,7 @@ if(!this->dead){
 
 }
 
-bool Snake::Colision(RenderWindow* window){
+bool Snake::Colision(RenderWindow* window, Food* food){
 
     // wall colision
 
@@ -95,6 +95,16 @@ bool Snake::Colision(RenderWindow* window){
 
     }
 
+    // food colision
+
+    if(abs(PosX[0] - food->GetX()) < 15.f && abs(PosY[0] - food->GetY()) < 15.f){ // if it collides with food
+
+        this->InSize();
+
+        food->Gen(window);
+
+    }
+
     return false;
 
 }
@@ -103,6 +113,6 @@ void Snake::InSize(){ // increasing the size by one
         
     this->player.push_back(new RectangleShape); 
 
-    this->player[this->player.size() - 1]->setSize(Vector2f(20, 20));
+    this->player[this->player.size() - 1]->setSize(Vector2f(10, 10));
 
 }

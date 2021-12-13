@@ -3,6 +3,7 @@
 #include"Libraries.h"
 
 #include"Snake.h"
+#include"Food.h"
 
 class Game{
     
@@ -31,7 +32,7 @@ class Game{
         //Functions
 
         Texture* createTexture(const char* dir);
-        void UpdateInput(Snake* snake);
-        void Update(Snake* snake);
-        void Render(std::vector<RectangleShape*> cube);
+        void UpdateInput(Snake* snake, Food* food);
+        void Update(Snake* snake, Food* food);
+        void Render(std::vector<RectangleShape*> cube, Food* food);
 };

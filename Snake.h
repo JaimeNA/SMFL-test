@@ -2,6 +2,8 @@
 
 #include"Libraries.h"
 
+#include"Food.h"
+
 class Snake{
 
 private:
@@ -17,11 +19,19 @@ public:
 
     Snake();
 
+    // destructor
+
+    ~Snake(){
+
+        player.clear();
+
+    }
+
     // functions
 
     void Update();
     void Move(float x, float y);
-    bool Colision(RenderWindow* window);
+    bool Colision(RenderWindow* window, Food* food);
 
     // accessors
 

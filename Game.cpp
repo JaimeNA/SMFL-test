@@ -35,9 +35,9 @@ Texture* Game::createTexture(const char* dir){
 
 }
 
-void Game::UpdateInput(Snake* snake){
+void Game::UpdateInput(Snake* snake, Food* food){
 
-    static float x, y = 15.f;
+    static float x, y = 5.f;
 
     // check all the window's events that were triggered since the last iteration of the loop
     
@@ -54,7 +54,7 @@ void Game::UpdateInput(Snake* snake){
         case Keyboard::A:// left
 
             if(x == 0.f) // block going back in the same direction
-                x = -15.f;  
+                x = -5.f;  
 
             y = 0.f;
 
@@ -63,7 +63,7 @@ void Game::UpdateInput(Snake* snake){
         case Keyboard::D:// right
         
             if(x == 0.f)
-                x = 15.f; // to avoid going diagonal
+                x = 5.f; // to avoid going diagonal
             y = 0.f;
 
         break;
@@ -73,7 +73,7 @@ void Game::UpdateInput(Snake* snake){
             x = 0.f;
 
             if(y == 0.f)
-                y = -15.f;
+                y = -5.f;
 
         break;
 
@@ -82,24 +82,17 @@ void Game::UpdateInput(Snake* snake){
             x = 0.f;
 
             if(y == 0.f)
-            y = 15.f;
+            y = 5.f;
 
         break;
 
-        case Keyboard::Space:// down
-
-            snake->InSize();
-            
-
-        break;
-  
         default:
         break;
         }
 
     }
 
-    if(!snake->Colision(&window)){// checking for collision
+    if(!snake->Colision(&window, food)){// checking for collision
 
         snake->Move(x, y);// moving the snake in requested direction
 
@@ -107,17 +100,21 @@ void Game::UpdateInput(Snake* snake){
 
 }
 
-void Game::Update(Snake* snake){
+void Game::Update(Snake* snake, Food* food){
 
-    UpdateInput(snake);
+    UpdateInput(snake, food);
 
 }
 
 Texture Tex;
 
-void Game::Render(std::vector<RectangleShape*> cube){
+void Game::Render(std::vector<RectangleShape*> cube, Food* food){
 
-    cube[0]->setTexture(createTexture("t.png"));
+    for(int i = 1; i < cube.size();i++){// go through all the elements
+
+        cube[i]->setTexture(createTexture("t.png"));
+
+    }
 
     // clearing the window with a white color
     window.clear(Color::White);
@@ -132,6 +129,8 @@ void Game::Render(std::vector<RectangleShape*> cube){
         renderTexture.draw(*cube[i]);
 
     }
+
+    renderTexture.draw(*food->GetFood()); // renders the food
 
     // end the current frame
     renderTexture.display();
